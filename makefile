@@ -2,8 +2,8 @@ DED_FLAGS=-Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wconversion -Wctor-dt
 
 all: Stack
 
-Stack: main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackGuard.o
-	@g++ main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackGuard.o -o Stack
+Stack: main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackGuard.o StackDestruct.o ErrorPrint.o
+	@g++ main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackGuard.o StackDestruct.o ErrorPrint.o -o Stack
 
 main.o: main.cpp
 	@g++ $(DED_FLAGS) -c main.cpp -o main.o
@@ -29,5 +29,12 @@ StackDump.o: StackDump.cpp
 StackGuard.o: StackGuard.cpp
 	@g++ $(DED_FLAGS) -c StackGuard.cpp -o StackGuard.o
 
+StackDestruct.o: StackDestruct.cpp
+	@g++ $(DED_FLAGS) -c StackDestruct.cpp -o StackDestruct.o
+
+ErrorPrint.o: ErrorPrint.cpp
+	@g++ $(DED_FLAGS) -c ErrorPrint.cpp -o ErrorPrint.o	
+
 clean:
-	rm -rf *.o Stack
+	rm *.o
+	rm Stack

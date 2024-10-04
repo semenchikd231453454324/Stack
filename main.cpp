@@ -12,6 +12,7 @@
 #include "StackDump.h"
 #include "StackVerif.h"
 #include "StackGuard.h"
+#include "StackDestruct.h"
 
 
 int main()
@@ -21,9 +22,9 @@ int main()
     // StackError error = NO_ERROR;
     StackCtor(&Stack);
 
-    // if ((error = StackCtor(&Stack))) {           //TODO dump, destruct, free память, статья на хабре про функц макросы
-    //    print_error(error);
-    //    return 1;
+    // if ((error = StackCtor(&Stack))) {           //TODO статья на хабре про функц макросы
+    //    print_error(error);                       //TODO мб уже структуру с ошибками и сделать отдельную функцию для распечатки ошибок, ну или же побитовые операции с числами че дима скажет)))
+    //    return 1;                                 //TODO может массив ошибок с enum ну прикольно на самом деле
     //}
 
     StackPush(&Stack, 1);
@@ -52,6 +53,8 @@ int main()
     
     DUMP(&Stack);
 
-    StackVerif(&Stack, __LINE__, __FILE__);
+    VERIF(&Stack);
 
+    StackDestruct(&Stack);
+    
 }

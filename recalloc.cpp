@@ -25,7 +25,7 @@ void* recalloc(void* MemPointer, size_t ElementsNum, size_t SizeOfElement, int W
 
             void* MemPointerForMemset = (void*) ((char*) NemMemPointer + (ElementsNum*SizeOfElement)/2);
 
-            memset( MemPointerForMemset, 0, (ElementsNum*SizeOfElement)/2);
+            memset( MemPointerForMemset, Poison, (ElementsNum*SizeOfElement)/2);
 
             break;
         }
@@ -42,8 +42,6 @@ void* recalloc(void* MemPointer, size_t ElementsNum, size_t SizeOfElement, int W
         default:
         {
             return nullptr;
-
-            break;
         }
     }  
 

@@ -11,18 +11,18 @@ int StackCtor(StackStruct* Stack)
 {
     assert(Stack);
 
-    Stack->Capacity = 8;
+    Stack->Capacity = 8; // FIXME not hardcode
 
     if(Stack->Capacity == 0)
     {
-        printf("Can't create 0 size stack");
+        Stack->Errors = Stack->Errors | StackCapacityZero;
         return 1;
     }
 
     Stack->StackData = (elem_t*) calloc(Stack->Capacity, sizeof(elem_t));
     if (!Stack->StackData)
     {
-        printf("pointer StackData failure");
+        Stack->Errors = Stack->Errors | PointerStackDataFailureInCtor;
         return 1;
     }
     

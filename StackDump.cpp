@@ -20,5 +20,5 @@ void StackDump(StackStruct* Stack, size_t CallLineNum, const char* CallFile)
     {
         printf("Stack Element %d = %d\n", ElemNum, Stack->StackData[ElemNum]);
     }
-
+                                                                                    //TODO Вписать показ ошибок в вериф, вероятно сделать отдельную функция для этого
 }

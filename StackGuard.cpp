@@ -11,11 +11,11 @@ int StackGuard(StackStruct* Stack)
 {
     assert(Stack);
 
-    for(size_t ElemNum; ElemNum < (Stack->Capacity - Stack->Size); ElemNum++)
+    for(size_t ElemNum = 0; ElemNum < (Stack->Capacity - Stack->Size); ElemNum++)
     {
-        if(Stack->StackData[Stack->Size + ElemNum] != 0)
+        if(Stack->StackData[Stack->Size + ElemNum] != Poison)
         {
-            printf("DataDamaged\n");
+            Stack->Errors = Stack->Errors | DataUnsafe;
 
             return DataDamaged;
         }

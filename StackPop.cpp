@@ -14,16 +14,15 @@ int StackPop(StackStruct* Stack)
 
     //printfStackElem;
 
-    Stack->StackData[Stack->Size] = 0;
+    Stack->StackData[Stack->Size] = Poison;
 
     Stack->Size--;
 
-    if(Stack->Size <= (Stack->Capacity)/4)
+    if(Stack->Size <= (Stack->Capacity)/4)  // FIXME
     {
-        if((Stack->StackData = (elem_t*) recalloc(Stack->StackData, (Stack->Capacity) / 4, sizeof(elem_t), Reduce)) == nullptr)           //TODO мы поняли что recalloc возвращает ошибку, что делать ----> enum
+        if((Stack->StackData = (elem_t*) recalloc(Stack->StackData, (Stack->Capacity) / 4, sizeof(elem_t), Reduce)) == nullptr) 
         {
-            printf("StackPop recalloc failuire\n");
-
+            Stack->Errors = Stack->Errors | recallocPopFailure;
         }
 
         Stack->Capacity = Stack->Capacity / 4;
@@ -32,5 +31,3 @@ int StackPop(StackStruct* Stack)
     return Stack->StackData[Stack->Size];
 
 } 
-
-//TODO read nvlope

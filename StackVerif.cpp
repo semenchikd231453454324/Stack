@@ -4,6 +4,7 @@
 #include <math.h>
 #include <assert.h>
 
+#include "ErrorPrint.h"
 #include "StackGuard.h"
 #include "StackVerif.h"
 #include "StackStruct.h"
@@ -18,23 +19,20 @@ int StackVerif(StackStruct* Stack, size_t CallLineNum, const char* CallFile)
 
     if (Stack->Size >> Stack->Capacity)
     {
-        printf("StacOverflow\n");
-
-        return StackOverflow;
+        Stack->Errors = Stack->Errors | StackOverflowed;
     }
     
     if(!Stack->StackData)
     {
-        printf("Stack adress failure");
-
-        return NullAdr;
+        Stack->Errors = Stack->Errors | StackAdrFailuire;
     }
 
     if(StackGuard(Stack))
     {
-        return DataDamage;
+        Stack->Errors = Stack->Errors | DataUnsafe;
     }
     
-    printf("NoErrors");
-    return NoErrors;
+    ErrorPrint(Stack);
+
+    return 0;
 }

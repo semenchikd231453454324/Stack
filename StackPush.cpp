@@ -20,7 +20,7 @@ void StackPush(StackStruct* Stack, int NewElem)
     {
         if((Stack->StackData = (elem_t*) recalloc(Stack->StackData, (Stack->Capacity)*2, sizeof(elem_t), Expand)) == nullptr)          //TODO мы поняли что recalloc возвращает ошибку, что делать
         {
-            printf("recalloc failure0");
+            Stack->Errors = Stack->Errors | recallocPushFailure;
         }
         
         Stack->Capacity = (Stack->Capacity)*2;

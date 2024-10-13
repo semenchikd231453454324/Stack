@@ -9,20 +9,17 @@
 
 int StackDestruct(StackStruct* Stack)
 {
-    assert(Stack);
-
-    if (!Stack->StackData)
-    {
-        printf ("nullptrInfree");
-
-        Stack->Errors = Stack->Errors | nullptrDataInFree;
-
-        return nullptrInfree;
+    if (!Stack) {
+        return StackDestructed;
     }
+
+    Stack->Capacity = 0;
+    Stack->Size     = 0;
+    Stack->Errors   = 0;
 
     free(Stack->StackData);
 
-    Stack = {};
+    Stack->StackData = nullptr;
 
     return StackDestructed;
 }

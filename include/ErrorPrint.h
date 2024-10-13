@@ -10,8 +10,6 @@
     }                                  \
 } while(0)
 
-//FIXME printf arg 
-
 int ErrorPrint(StackStruct* Stack);                              
 
 #endif

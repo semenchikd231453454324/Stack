@@ -1,40 +1,28 @@
-DED_FLAGS=-Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal -Wformat-security -Wformat=2 -Wignored-qualifiers -Winit-self -Winline -Wlogical-op -Wmain -Wmissing-declarations -Wno-missing-field-initializers -Wmissing-include-dirs -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wswitch-default -Wswitch-enum -Wtype-limits -Wundef -Wunreachable-code -Wwrite-strings -fexceptions -g -pipe -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC
 
-all: Stack
+DED_FLAGS=-Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Iinclude -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal -Wformat-security -Wformat=2 -Wignored-qualifiers -Winit-self -Winline -Wlogical-op -Wmain -Wmissing-declarations -Wno-missing-field-initializers -Wmissing-include-dirs -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wredundant-decls -Wshadow -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wswitch-default -Wswitch-enum -Wtype-limits -Wundef -Wunreachable-code -Wwrite-strings -fexceptions -g -pipe -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC
+FILE_OBJECTS=main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackDestruct.o ErrorPrint.o
+EXE_NAME=Stack
+build_dir=Build
 
-Stack: main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackGuard.o StackDestruct.o ErrorPrint.o
-	@g++ main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackGuard.o StackDestruct.o ErrorPrint.o -o Stack
+src_prefix=src/
+build_prefix=Build/
+#PATH=C:/Windows/System32/cmd.exe
+#putsubstr
+#variab
 
-main.o: main.cpp
-	@g++ $(DED_FLAGS) -c main.cpp -o main.o
+HUI = $(addprefix ${src_prefix}, main.cpp StackCtor.cpp StackPush.cpp recalloc.cpp StackPop.cpp StackDump.cpp StackVerif.cpp StackDestruct.cpp ErrorPrint.cpp)
+OBJ = $(addprefix ${build_prefix}, main.o StackCtor.o StackPush.o recalloc.o StackPop.o StackDump.o StackVerif.o StackDestruct.o ErrorPrint.o)
 
-StackCtor.o: StackCtor.cpp
-	@g++ $(DED_FLAGS) -c StackCtor.cpp -o StackCtor.o
 
-StackPush.o: StackPush.cpp
-	@g++ $(DED_FLAGS) -c StackPush.cpp -o StackPush.o
+all : $(EXE_NAME)
 
-recalloc.o: recalloc.cpp
-	@g++ $(DED_FLAGS) -c recalloc.cpp -o recalloc.o
+$(EXE_NAME): $(OBJ)
+	@echo "[LD] Linking"
+	@g++ $^ ${DED_FLAGS} -o Stack
 
-StackPop.o: StackPop.cpp
-	@g++ $(DED_FLAGS) -c StackPop.cpp -o StackPop.o
-
-StackVerif.o: StackVerif.cpp
-	@g++ $(DED_FLAGS) -c StackVerif.cpp -o StackVerif.o
-
-StackDump.o: StackDump.cpp
-	@g++ $(DED_FLAGS) -c StackDump.cpp -o StackDump.o
-
-StackGuard.o: StackGuard.cpp
-	@g++ $(DED_FLAGS) -c StackGuard.cpp -o StackGuard.o
-
-StackDestruct.o: StackDestruct.cpp
-	@g++ $(DED_FLAGS) -c StackDestruct.cpp -o StackDestruct.o
-
-ErrorPrint.o: ErrorPrint.cpp
-	@g++ $(DED_FLAGS) -c ErrorPrint.cpp -o ErrorPrint.o	
+${build_prefix}%.o: src\%.cpp
+	@echo "[CXX] $@"
+	@g++ -c $^ ${DED_FLAGS} -o $@
 
 clean:
-	rm *.o
-	rm Stack
+	rm -rf *.o *.exe

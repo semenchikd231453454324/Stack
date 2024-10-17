@@ -19,17 +19,31 @@ int main()
     struct StackStruct Stack = {};
 
     StackCtor(&Stack);
-    StackPopprint;
+
 
     StackPush(&Stack, -1);
-    StackPush(&Stack, 0);
-    StackDestruct(&Stack);
 
     DUMP(&Stack);
 
     StackPopprint;
-    StackPopprint;
-    StackPopprint;
+
+    DUMP(&Stack);
+
+    /*
+    StackPush(&Stack, 0);
+
+
+    for(int count = 0; count < 10; count++)
+    {
+        StackPush(&Stack, 78);
+
+    }
+    
+    
+    DUMP(&Stack);
+    */
+    StackDestruct(&Stack);
+
     
 
 }

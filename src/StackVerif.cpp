@@ -39,6 +39,14 @@ int StackVerif(StackStruct* Stack, size_t CallLineNum, const char* CallFile)
     
     StackCanaryCheck(Stack);
 
+    if(Stack->Errors)
+    {
+        printf("STACK VERIFICATION\n");
+        printf("Verification called from:   %s\n", CallFile);
+        printf("Line:   %d\n", CallLineNum);
+    }
+
+
     ErrorPrint(Stack);
 
     return 0;

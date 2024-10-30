@@ -18,10 +18,6 @@ int StackVerif(StackStruct* Stack, size_t CallLineNum, const char* CallFile)
 {
     assert(Stack);
 
-    printf("STACK VERIFICATION\n");
-    printf("Verification called from:   %s\n", CallFile);
-    printf("Line:   %d\n", CallLineNum);
-
     if (Stack->Size >> Stack->Capacity)                     //TODO функц макрос для этих ифов
     {
         Stack->Errors = Stack->Errors | StackOverflowed;

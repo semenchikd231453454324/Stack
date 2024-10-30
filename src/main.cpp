@@ -21,7 +21,7 @@ int main()
     StackCtor(&Stack);
 
 
-    StackPush(&Stack, -1);
+    StackPush(&Stack, 4);
 
     DUMP(&Stack);
 
